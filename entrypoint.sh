@@ -39,7 +39,7 @@ for repo in $(jq -c '.repositories[]' "$1"); do
 
   pull_request_branch=$(echo "$repo" | jq -r '.pull_request.branch')
   if [ "$pull_request_branch" != "null" ]; then
-    gh pr create -B "$pull_request_branch" --title "$4"
+    gh pr create -B "$pull_request_branch" --title "$4" --body ""
   fi
 
   cd ../
