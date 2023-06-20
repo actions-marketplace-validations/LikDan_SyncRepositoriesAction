@@ -1,0 +1,12 @@
+on: [push]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    name: Sync Repositories
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Syncing
+        uses: ./
+

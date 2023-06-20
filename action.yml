@@ -1,0 +1,13 @@
+# action.yml
+name: 'SyncRepositories'
+description: 'Allow syncing some files or dirs between repositories'
+inputs:
+  config-path:
+    description: 'Path to action configuration'
+    required: true
+    default: '.syncconfig'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.config }}
