@@ -1,3 +1,17 @@
 {
-  "test": "value"
+  "files": [
+    "test-folder",
+    "test-file"
+  ],
+  "repositories": [
+    {
+      "name": "SyncActionTestRepository",
+      "user": "LikDan",
+      "branch": "sync",
+      "pull_request": {
+        "to_branch": "orogin/main"
+      }
+    }
+  ],
+  "commitMessage": "Synchronization commit"
 }
