@@ -9,7 +9,7 @@
       "user": "LikDan",
       "branch": "sync",
       "pull_request": {
-        "to_branch": "orogin/main"
+        "branch": "main"
       }
     }
   ],

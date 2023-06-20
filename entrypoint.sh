@@ -5,7 +5,7 @@ commitMessage=$(jq -r '.commitMessage' "$1")
 
 git config --global user.email "$3"
 
-gh auth login --with-token "$2"
+echo "$2" | gh auth login --with-token
 
 for repo in $(jq -c '.repositories[]' "$1"); do
   repo_name=$(echo "$repo" | jq -r '.name')
@@ -36,8 +36,8 @@ for repo in $(jq -c '.repositories[]' "$1"); do
   git push --set-upstream origin "$repo_branch"
 
   pull_request_branch=$(echo "$repo" | jq -r '.pull_request.branch')
-  if [ "$pull_request_branch" ]; then
-    ../bin/gh pr create --title "Pull request title" --body "Pull request body"
+  if [ "$pull_request_branch" != "null" ]; then
+    gh pr create -B "$pull_request_branch" --title "$4"
   fi
 
   cd ../
