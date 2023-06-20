@@ -6,8 +6,20 @@ inputs:
     description: 'Path to action configuration'
     required: true
     default: '.syncconfig'
+  token:
+    description: 'GitHub Token to get access to repository'
+    required: true
+  email:
+    description: 'Author of commit (email)'
+    required: true
+  pr-title:
+    description: 'Title for pull request'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.config-path }}
+    - ${{ inputs.token }}
+    - ${{ inputs.email }}
+    - ${{ inputs.pr-title }}
