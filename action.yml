@@ -1,6 +1,9 @@
 # action.yml
 name: 'SyncRepositories'
 description: 'Allow syncing some files or dirs between repositories'
+branding:
+  icon: 'crosshair'
+  color: 'purple'
 inputs:
   config-path:
     description: 'Path to action configuration'
