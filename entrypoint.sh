@@ -3,8 +3,6 @@
 uploadFiles=$(jq -r '.files[]' "$1")
 commitMessage=$(jq -r '.commitMessage' "$1")
 
-echo "$1" "$2" "$3" "$4"
-
 git config --global user.email "$3"
 
 echo "$2" | gh auth login --with-token
@@ -28,9 +26,13 @@ for repo in $(jq -c '.repositories[]' "$1"); do
   fi
 
   for file in $uploadFiles; do
-    rm -r "$file"
-    cp -r ../"$file" "$file"
-    git add "$file"
+    replacement=$(echo "$repo" | jq -r ".fileReplacements.\"$file\"")
+    [ "$replacement" = "null" ] && filename="$file" || filename="$replacement"
+
+    rm -r "$filename"
+    cp -r ../"$file" "$filename"
+
+    git add "$filename"
   done
 
   git commit -m "$commitMessage"

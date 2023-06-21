@@ -10,6 +10,9 @@
       "branch": "sync",
       "pull_request": {
         "branch": "main"
+      },
+      "fileReplacements": {
+        "test-folder": "folder"
       }
     }
   ],
