@@ -37,6 +37,9 @@ for repo in $(jq -c '.repositories[]' "$1"); do
     git add "$filename"
   done
 
+  ls -a
+  git status
+
   git commit -m "$4"
   git remote set-url origin "$url"
   git push --set-upstream origin "$repo_branch"
