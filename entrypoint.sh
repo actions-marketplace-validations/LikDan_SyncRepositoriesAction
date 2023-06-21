@@ -24,9 +24,12 @@ for repo in $(jq -c '.repositories[]' "$1"); do
     git checkout -b "$repo_branch"
   fi
 
+  ls -a ../
   for file in $uploadFiles; do
     replacement=$(echo "$repo" | jq -r ".fileReplacements.\"$file\"")
     [ "$replacement" = "null" ] && filename="$file" || filename="$replacement"
+
+    echo "Updating $filename"
 
     rm -r "$filename"
     cp -r ../"$file" "$filename"
