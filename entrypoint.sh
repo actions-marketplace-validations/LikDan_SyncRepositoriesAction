@@ -1,7 +1,6 @@
 #!/bin/sh -l
 
 uploadFiles=$(jq -r '.files[]' "$1")
-commitMessage=$(jq -r '.commitMessage' "$1")
 
 git config --global user.email "$3"
 
@@ -35,13 +34,13 @@ for repo in $(jq -c '.repositories[]' "$1"); do
     git add "$filename"
   done
 
-  git commit -m "$commitMessage"
+  git commit -m "$4"
   git remote set-url origin "$url"
   git push --set-upstream origin "$repo_branch"
 
   pull_request_branch=$(echo "$repo" | jq -r '.pull_request.branch')
   if [ "$pull_request_branch" != "null" ]; then
-    gh pr create -B "$pull_request_branch" --title "$4" --body ""
+    gh pr create -B "$pull_request_branch" --title "$5" --body "$6"
   fi
 
   cd ../

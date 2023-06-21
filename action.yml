@@ -12,9 +12,17 @@ inputs:
   email:
     description: 'Author of commit (email)'
     required: true
+  commit-message:
+    description: 'Message for commit'
+    required: true
+    default: "Sync"
   pr-title:
     description: 'Title for pull request'
     required: false
+  pr-body:
+    description: 'Body for pull request'
+    required: false
+    default: ""
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -22,4 +30,6 @@ runs:
     - ${{ inputs.config-path }}
     - ${{ inputs.token }}
     - ${{ inputs.email }}
+    - ${{ inputs.commit-message }}
     - ${{ inputs.pr-title }}
+    - ${{ inputs.pr-body }}
