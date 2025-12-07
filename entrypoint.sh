@@ -24,15 +24,21 @@ for repo in $(jq -c '.repositories[]' "$1"); do
     git checkout -b "$repo_branch"
   fi
 
+  ls -a ../
   for file in $uploadFiles; do
     replacement=$(echo "$repo" | jq -r ".fileReplacements.\"$file\"")
     [ "$replacement" = "null" ] && filename="$file" || filename="$replacement"
+
+    echo "Updating $filename"
 
     rm -r "$filename"
     cp -r ../"$file" "$filename"
 
     git add "$filename"
   done
+
+  ls -a
+  git status
 
   git commit -m "$4"
   git remote set-url origin "$url"
